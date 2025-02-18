@@ -1,47 +1,86 @@
-## Getting Started
+# WesternShootout Smart Contract
 
-Create a project using this example:
+## Deployment
+**Contract Address (Polygon AMOY):** `0x4B61a504f67789d24Fff761b9650C97F8292c448`
 
-```bash
-npx thirdweb create --contract --template forge-starter
-```
+## Overview
+WesternShootout is a smart contract that enables 1vs1 wagered gameplay with automated prize distribution and player statistics tracking. The contract manages game sessions, player matchmaking, and secure prize distribution while maintaining a complete history of games and player statistics on-chain.
 
-You can start editing the page by modifying `contracts/Contract.sol`.
+## Key Features
+- 🎮 Automated game session management
+- 💰 Secure wager handling and prize distribution
+- 📊 On-chain player statistics tracking
+- 🏆 Fair winner declaration system
+- 🔄 Automatic new game creation
+- ⚡ Owner-controlled game management
 
-To add functionality to your contracts, you can use the `@thirdweb-dev/contracts` package which provides base contracts and extensions to inherit. The package is already installed with this project. Head to our [Contracts Extensions Docs](https://portal.thirdweb.com/thirdweb-deploy/contract-extensions) to learn more.
+## Contract Architecture
 
-## Building the project
+### Game States
+- **Waiting**: New game waiting for players to join
+- **Ready**: Two players have joined, game is in progress
+- **Completed**: Game has ended with a winner declared
 
-After any changes to the contract, run:
+### Core Components
 
-```bash
-npm run build
-# or
-yarn build
-```
+#### 1. Game Structure
+Each game contains:
+- Unique game ID
+- Player addresses (player1 & player2)
+- Winner address
+- Wager amount
+- Fee amount
+- Current state
+- Timestamp
 
-to compile your contracts. This will also detect the [Contracts Extensions Docs](https://portal.thirdweb.com/thirdweb-deploy/contract-extensions) detected on your contract.
+#### 2. Player Statistics
+Tracks for each player:
+- Total wins
+- Total losses
+- Games played
 
-## Deploying Contracts
+## Main Functions
 
-When you're ready to deploy your contracts, just run one of the following command to deploy you're contracts:
+### For Players
+- `joinGame()`: Join the current active game by sending the required wager
+  - Must send exact wager amount
+  - First player becomes player1
+  - Second player becomes player2
+  - Game state changes to Ready when full
 
-```bash
-npm run deploy
-# or
-yarn deploy
-```
+### For Contract Owner
+- `declareWinner(address winner)`: Declare the game winner and distribute prizes
+  - Validates winner is a participant
+  - Calculates and distributes fees
+  - Updates player statistics
+  - Creates new game automatically
+- `cancelGame()`: Cancel an incomplete game
+  - Only works in Waiting state
+  - Refunds joined players
+  - Creates new game automatically
 
-## Releasing Contracts
+## Events
+The contract emits the following events:
+- `GameCreated`: When a new game starts
+- `PlayerJoined`: When a player joins a game
+- `WinnerDeclared`: When a winner is declared
 
-If you want to release a version of your contracts publicly, you can use one of the followings command:
+## Integration Guide
+### With Game Clients
+1. Monitor `GameCreated` events for new games
+2. Call `joinGame()` when player wants to participate
+3. Track `PlayerJoined` events to update game status
+4. Listen for `WinnerDeclared` events to update UI and player balances
 
-```bash
-npm run release
-# or
-yarn release
-```
+### Player Statistics
+Query `playerStats` mapping with player's address to get:
+- Win count
+- Loss count
+- Total games played
 
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+## Security Features
+- Secure fund handling
+- State validation checks
+- Owner-only sensitive operations
+- Protected winner declaration
+- Automated fee calculation and distribution
