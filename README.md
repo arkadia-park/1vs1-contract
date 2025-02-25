@@ -7,7 +7,7 @@
 
 WesternShootout is a feature-rich smart contract that enables 1vs1 wagered gameplay with automated prize distribution, dispute resolution, and comprehensive player statistics tracking. The contract manages multiple concurrent game sessions, player matchmaking, and secure prize distribution while maintaining a complete history of games and player statistics on-chain.
 
-**Contract Address (Polygon AMOY):** `0x4B61a504f67789d24Fff761b9650C97F8292c448`
+**Contract Address (Polygon AMOY):** `0x17B6f309E57F684F643C4C3F8A91C6a8219C53f0`
 
 ## ✨ Key Features
 
@@ -366,8 +366,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 For questions or support, please open an issue on this repository or contact us at:
-- Twitter: [@arkadia_park](https://twitter.com/arkadia_park)
-- Discord: [Join our server](https://discord.gg/arkadiagames)
+- Twitter: [@Arkadia_Park](https://x.com/Arkadia_Park)
+- Discord: [Join our server](https://discord.com/arkadia-park)
 
 ---
 
