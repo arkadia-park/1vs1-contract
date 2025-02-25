@@ -123,17 +123,17 @@ The contract emits the following events:
 1. **Connect to the Contract**
 ```javascript
 // Using ethers.js
-const contractAddress = "0x4B61a504f67789d24Fff761b9650C97F8292c448";
+const contractAddress = "0x17B6f309E57F684F643C4C3F8A91C6a8219C53f0";
 const westernShootout = new ethers.Contract(contractAddress, WesternShootoutABI, provider);
 ```
 
 2. **Create or Join a Game**
 ```javascript
-// Create a new game with 0.01 MATIC wager
+// Create a new game with 0.01 POL wager
 const tx = await westernShootout.createGame(ethers.utils.parseEther("0.01"));
 await tx.wait();
 
-// Or find and join a game with 0.01 MATIC wager
+// Or find and join a game with 0.01 POL wager
 const tx = await westernShootout.findAndJoinGame({
   value: ethers.utils.parseEther("0.01")
 });
@@ -217,7 +217,7 @@ void AMyGameMode::InitializeBlockchain()
     ThirdWebSubsystem->Initialize(EChain::PolygonAmoy);
     
     // Connect to WesternShootout contract
-    ContractAddress = TEXT("0x4B61a504f67789d24Fff761b9650C97F8292c448");
+    ContractAddress = TEXT("0x17B6f309E57F684F643C4C3F8A91C6a8219C53f0");
     ThirdWebSubsystem->ConnectToContract(ContractAddress, WesternShootoutABI);
 }
 ```
@@ -326,15 +326,15 @@ Majority decision enforced → Winner receives prize
 
 To interact with the contract on Polygon Amoy testnet:
 
-1. **Get Test MATIC**
+1. **Get Test POL**
    - Visit the [Polygon Amoy Faucet](https://amoy.polygon.technology/faucet)
-   - Request test MATIC for your wallet
+   - Request test POL for your wallet
 
 2. **Connect to Amoy Network**
    - Network Name: Polygon Amoy
    - RPC URL: https://rpc-amoy.polygon.technology/
    - Chain ID: 80002
-   - Currency Symbol: MATIC
+   - Currency Symbol: POL
    - Block Explorer: https://amoy.polygonscan.com/
 
 3. **Test Transactions**
